@@ -1,4 +1,16 @@
-﻿@using SilverBrightGallery.Models
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+
+</body>
+</html>
+--------------------------------------------------------------------------------------------------------------------------------------
+
+@using SilverBrightGallery.Models
 @model SilverBrightGallery.Models.Product
 @{
     ViewBag.Title = "ProductDetail";
@@ -59,7 +71,7 @@
     </div>
     <!-- Search Wrapper Area End -->
     <!-- ##### Main Content Wrapper Start ##### -->
-    <div class="main-content-wrapper d-flex clearfix" >
+    <div class="main-content-wrapper d-flex clearfix">
 
         <!-- Mobile Nav (max width 767px)-->
         <div class="mobile-nav">
@@ -127,14 +139,14 @@
             </nav>
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
-                <a href="@Url.Action("Discount","Home")" class="btn amado-btn mb-15">Special Offer</a>
+                <a href="@Url.Action("Discount","Home")" class="btn amado-btn mb-15">SALE</a>
                 @*<a href="#" class="btn amado-btn active">New this week</a>*@
             </div>
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-100">
                 <a href="@Url.Action("Cart","Home")" class="cart-nav"><img src="~/Content/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
             </div>
-            
+
         </header>
         <!-- Header Area End -->
         <!-- Product Details Area Start -->
@@ -144,17 +156,17 @@
                     <div class="col-lg-7">
                         <div class="single_product_thumb">
                             <div id="product_details_slider" class="carousel slide" data-ride="carousel" style="border:1px solid grey;">
-                                    <div class="carousel-inner">
+                                <div class="carousel-inner">
                                     <div class="carousel-item active">
                                         <a class="gallery_img" href='@Url.Action("ProductDetail", "Home",new { id=Model.ID})'>
-                                          <img class="d-block w-100" src="~/Content/img/@Url.Content(Model.Photo)" style="width: 360px; height: 580px" alt="First slide">
+                                            <img class="d-block w-100" src="~/Content/img/@Url.Content(Model.Photo)" style="width: 360px; height: 580px" alt="First slide">
                                         </a>
-                                    </div>                            
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-5">
+                    <div class="col-lg-5">                  
                         <div class="single_product_desc">
                             <!-- Product Meta Data -->
                             <div class="product-meta-data">
@@ -169,65 +181,85 @@
                                         <a href="product-details.html">
                                             <h6>@Model.ProductName</h6>
                                         </a>
-                                    </div>
+                                     </div>
                                 </div>
-                                <!-- Ratings & Review -->
+                                        <!-- Ratings & Review -->
                                 <div class="row">
-                                        <div class="col-md-6 ratings text-left">
-                                            @Model.ManufacturingDate
-                                        </div>
-
-                                        <div class="col-md-6 review text-right">
+                                    <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
+                                            <div class= "col-md-6 ratings">
+                                                @Model.ManufacturingDate
+                                            </div>
+                                        
+                                        <div class="col-md-6 review">
                                             <a href="#">Write A Review</a>
                                         </div>
+                                    </div>
                                 </div>
-                                <!-- Avaiable -->
+                                        <!-- Avaiable -->
                                 <div class="row">
                                     <div class="col-md-12">
                                         <p class="avaibility"><i class="fa fa-circle"></i> In Stock</p>
                                     </div>
-                                </div>
-                            </div>
+                                </div>               
+                              </div>
                             <div class="row">
                                 <div class="col-md-12 short_overview my-5">
                                     <p>@Model.ProductDescription</p>
                                 </div>
-                            </div>
+                            </div> 
+                                    <!-- Add to Cart Form -->
 
-                            <!-- Add to Cart Form -->
-                            
-                           @using (Html.BeginForm("addCart", "Home", FormMethod.Post, new { @class = "cart clearfix" }))
-                             {
-                               <div class="row" >
-                                   <div class="col-md-12">
-                                       <div class="row">
-                                           <div class="col-md-6 text-left" >
-                                               <div class="cart-btn d-flex mb-50" >
-                                                   <p style="height: 50px;">Qty</p>
-                                                   <div class="quantity">
-                                                       <input type="hidden" Name="Id" value="@Model.ID">
-                                                       <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) && qty & 1 ) effect.value--;return false;"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
-                                                       <input type="number" class="qty-text" style="height: 50px;" id="qty" step="1" min="1" max="300" name="quantity" value="1">
-                                                       <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></span>
-                                                   </div>
-                                               </div>
-                                           </div>
-                                           <div class="col-md-6 text-right" >
-                                               <button type="submit" name="addtocart" value="5" class="btn amado-btn">Add to cart</button>
-                                           </div>
-                                       </div>
-                                   </div>
-                               </div>                            
-                           }
+                                    @using (Html.BeginForm("addCart", "Home", FormMethod.Post, new { @class = "cart clearfix" }))
+                                    {
+                                        <div class="row">
+                                            <div class="col-mod-10 col-md-offset-2">
+                                                <div class="row">
+                                                    <div class="col-mod-6">
+                                                        <div class="cart-btn d-flex mb-50">
+                                                            <p>Qty</p>
+                                                            <div class="quantity">
+                                                                <input type="hidden" Name="Id" value="@Model.ID">
+                                                                <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) && qty & 1 ) effect.value--;return false;"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                                                                <input type="number" class="qty-text" style="height: 50px;" id="qty" step="1" min="1" max="300" name="quantity" value="1">
+                                                                <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-mod-6 text">
+                                                        <button type="submit" name="addtocart" value="5" class="btn amado-btn w-100" style="height: 50px;">Add to cart</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*                                <div class="cart-btn d-flex mb-50">
+                        <p>Qty</p>
+                        <div class="quantity">
+                            <input type="hidden" Name="Id" value="@Model.ID">
+                            <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) && qty & 1 ) effect.value--;return false;"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                            <input type="number" class="qty-text" id="qty" step="1" min="1" max="300" name="quantity" value="1">
+                            <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></span>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <button type="submit" name="addtocart" value="5" class="btn amado-btn w-100">Add to cart</button>
+                            </div>
+                            <br />
+                            <div class="col-md-12">
+                            </div>
+                        </div>
+                    </div>*@
+                                    }
+
+                                </div>
+                            </div>
                 </div>
             </div>
         </div>
         <!-- Product Details Area End -->
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
-    
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer_area clearfix">
         <div class="container">
@@ -242,7 +274,8 @@
                         <!-- Copywrite Text -->
                         <p class="copywrite">
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                           
+                            @*Copyright &copy;
+                                <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>*@
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </p>
                     </div>
@@ -256,7 +289,21 @@
                                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footerNavContent" aria-controls="footerNavContent" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
                                 <div class="collapse navbar-collapse" id="footerNavContent">
                                     <ul class="navbar-nav ml-auto">
-
+                                        @*<li class="nav-item active">
+                                                <a class="nav-link" href="'@Url.Action("Index","Home")'">Home</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="'@Url.Action("Collection","Home")'">Collection</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                @*<a class="nav-link" href="product-details.html">Product</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="'@Url.Action("Index","Home")'">Cart</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="'@Url.Action("Checkout","Home")'">Checkout</a>
+                                            </li>*@
                                         <li class="nav-item active">
                                             <a href="#" class="fa fa-facebook"></a>
                                         </li>

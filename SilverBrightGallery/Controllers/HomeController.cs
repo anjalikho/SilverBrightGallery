@@ -168,11 +168,35 @@ namespace SilverBrightGallery.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult ProductDetail(int id)
         {
             DBConn db = new DBConn();
             Product product = db.getProduct(id);
             return View(product);
+        }
+
+        [HttpPost]
+        public ActionResult ProductDetail(FormCollection form)
+        {
+            RegisterUser regUser = new RegisterUser();
+            regUser.UserName = form["Name"];
+            regUser.Password = form["Password"];
+
+            DBConn db = new DBConn();
+            RegisterUser registerUser = db.AuthenticateUser(regUser.UserName, regUser.Password);
+
+            if (registerUser != null)
+            {
+                TempData["Message"] = "Login Successfull.";
+                Session["Registration"] = registerUser;
+                return RedirectToAction("Cart", "Home");
+            }
+            else
+            {
+                TempData["Message"] = "Login Unsuccessful." + "" + "Please try Again";
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         //need to add two action in  a function.
@@ -313,7 +337,7 @@ namespace SilverBrightGallery.Controllers
             {
                 for (int i = 0; i < viewList.Count; i++)
                 {
-                    sum = sum + viewList[i].Total;
+                    sum = sum + (viewList[i].Price * viewList[i].Quantity);
                 }
             }
             checkoutViewModel.TotalCost = sum;
@@ -380,17 +404,7 @@ namespace SilverBrightGallery.Controllers
                         }
                     }
                 }
-/*
-                viewList.Clear();
-                for (int p = 0; p < pid.Length; p++)
-                {
-                    ViewCart addCart = new ViewCart();
-                    addCart.Product_Id = Int32.Parse(pid[p]);
-                    addCart.Quantity = Int32.Parse(qty[p]);
-                    //addCart.UserId = sessionReg.Id;
-                    viewList.Add(addCart);
-                }
-*/
+
             }
             else
             {

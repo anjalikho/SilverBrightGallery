@@ -170,7 +170,7 @@
                         </ul>
                     </div>
 
-                        <div class="form-check">
+                    <div class="form-check">
                       
                     </div>
                     <!-- Single Form Check -->
@@ -201,33 +201,8 @@
             </div>
         </div>
 
-        <div class="amado_product_area section-padding-100">
+        <div class="amado_product_area">
             <div class="container-fluid">
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="product-topbar d-xl-flex align-items-end justify-content-between">
-                            <!-- Total Products -->
-                            <div class="total-products">
-                                <p>
-                                    @*@Model.Count() products found.*@
-                                </p>
-                                <div class="view d-flex">
-                                </div>
-                            </div>
-                            <!-- Sorting -->
-                            <div class="product-sorting d-flex">
-                                <div class="sort-by-date d-flex align-items-center mr-15">
-                                </div>
-                                <div class="view-product d-flex align-items-center">
-                                    @*<p>View</p>*@
-                                    <form action="#" method="get">
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <!--Index style-->
                 <div class="row amado-pro-catagory clearfix">
                         <!-- Single Catagory -->
@@ -237,7 +212,7 @@
                                 @*<a href="shop.html">*@
                                 <a href='@Url.Action("ProductDetail", "Home",new { id=item.ID})'>
                                     <img src="~/Content/img/@Url.Content(item.Photo)"
-                                            style="height:450px; width:530px; border: 1px solid gray;" alt="">
+                                            style="height:350px; width:430px; border: 1px solid #d6d5d5;" alt="">
                                 </a>
                                 <!-- Hover Content -->
                                 <div class="hover-content">

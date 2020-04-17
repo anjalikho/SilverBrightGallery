@@ -51,6 +51,24 @@
         .modal-footer {
             background-color: #f9f9f9;
         }
+        .cart-table {
+            font-size: 12px;
+        }
+
+        .cart-table .headrow{
+            background-color: #f5f7fa;
+            padding-top: 10px;
+        }
+
+        .cart-table .datarow {
+            padding-top: 15px;
+            padding-bottom: 0px;
+        }
+
+        .qty-text {
+            text-align: center;
+        }
+
     </style>
 </head>
 
@@ -137,14 +155,10 @@
                     <a href="@Url.Action("Cart", "Home")" class="cart-nav"><img src="~/Content/img/core-img/cart.png" alt=""> Cart <span>(@Model.CountCartItems)</span></a>
 
                 </div>
-                <!-- Social Button -->
-                <div class="social-info d-flex justify-content-between">
-
-                </div>
             </header>
             <!-- Header Area End -->
 
-            <div class="cart-table-area section-padding-100">
+            <div class="cart-table-area">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-8 col-lg-8">
@@ -153,56 +167,60 @@
                             </div>
 
                             <div class="cart-table clearfix">
-                                <table class="table">
-                                        <tr>
-                                            <td>Image</td>
-                                            <td>Product</td>
-                                            <td>Price</td>
-                                            <td>Quantity</td>
-                                        </tr>
+                                <div class="row" >
+                                    <div class="col-12">
                                         @if (Model.ListofCartItems == null)
                                         {
-                                            <tr>
-                                                <td colspan="5">Your cart is empty.</td>
-                                            </tr>
+                                            <h3>Your cart is empty.</h3>
                                         }
-                                        else
+                                        
+                                        @if (Model.ListofCartItems != null)
                                         {
+                                            <div class="row headrow">
+                                                <div class="col-2"><h5 class="align-items-center">Image</h5></div>
+                                                <div class="col-3"><h5 class="align-items-center">Product</h5></div>
+                                                <div class="col-2"><h5 class="align-items-center">Price</h5></div>
+                                                <div class="col-3"><h5 class="align-items-center">Quantity</h5></div>
+                                                <div class="col-2" ><h5 class="align-items-center">Remove</h5></div>
+                                            </div>
+
                                             foreach (var item in Model.ListofCartItems)
                                             {
-                                                <tr>
-                                                    <td class="cart_product_img">
-                                                        <img src="~/Content/img/@Url.Content(item.Photo)" style="height:60px; width:60px;" alt="Product" />
-                                                    </td>
-                                                    <td class="cart_product_desc">
-                                                        <h5>@item.ProductName</h5>
-                                                    </td>
-                                                    <td class="cart_product_desc">
-                                                        <h5>£ @item.Price</h5>
-                                                    </td>
-                                                    <td class="qty">
-                                                        <div class="qty-btn d-flex" style="border: 1px solid red;">
-                                                            <p>Qty</p>
-                                                            <div class="quantity">
-                                                                <input type="hidden" Name="Id" value="@item.Product_Id">
-                                                                <span class="qty-minus" 
-                                                                      onclick="var effect = document.getElementById('qty_@item.Product_Id'); var qty = effect.value; if (!isNaN(qty) && qty > 1) effect.value--; return false;">
-                                                                <i class="fa fa-minus" aria-hidden="true"></i></span>
-                                                                
-                                                                <input type="number" class="qty-text" id="qty_@item.Product_Id" step="1" min="1" max="300" name="quantity" value=@item.Quantity>
-                                                                <span class="qty-plus" onclick="var effect = document.getElementById('qty_@item.Product_Id'); var qty = effect.value; if (!isNaN(qty)) effect.value++; return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                                            </div>
-                                                            <div class="btn btn-warning">
-                                                                <a href='@Url.Action("Delete", "Home", new { @id = @item.Product_Id })'>
-                                                                    Remove
-                                                                </a>
-                                                            </div>
+                                                <div class="row datarow">
+                                                    <div class="col-2">
+                                                        <img src="~/Content/img/@Url.Content(item.Photo)" style="height:100%; width:100%;" alt="Product" />
+                                                    </div>
+                                                    <div class="col-3">
+                                                        @item.ProductName
+                                                    </div>
+                                                    <div class="col-2">
+                                                        £ @item.Price
+                                                    </div>
+                                                    <div class="col-3 qty-btn d-flex justify-content-around">
+                                                        <p>Qty</p>
+                                                        <div class="quantity">
+                                                            <input type="hidden" Name="Id" value="@item.Product_Id">
+                                                            <span class="qty-minus"
+                                                                    onclick="var effect = document.getElementById('qty_@item.Product_Id'); var qty = effect.value; if (!isNaN(qty) && qty > 1) effect.value--; return false;">
+                                                                <i class="fa fa-minus" aria-hidden="true"></i>
+                                                            </span>
+
+                                                            <input type="number" class="qty-text" id="qty_@item.Product_Id" step="1" min="1" max="300" name="quantity" value=@item.Quantity>
+                                                            <span class="qty-plus" onclick="var effect = document.getElementById('qty_@item.Product_Id'); var qty = effect.value; if (!isNaN(qty)) effect.value++; return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
                                                         </div>
-                                                    </td>
-                                                </tr>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <div class="btn btn-warning" style="border: 1px solid blue;">
+                                                            <a href='@Url.Action("Delete", "Home", new { @id = @item.Product_Id })'>
+                                                                Remove
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             }
                                         }
-                                </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -225,10 +243,10 @@
                        
                     </div>
                                         
-                    <div class="row">
+                    <div class="row" style="padding-bottom: 30px;">
                         <div class="col-md-4 ">
                             <div class="cart-btn mt-100">
-                                <a href="@Url.Action("Collection", "Home")" class="btn amado-btn w-100">Contiune Shopping</a>
+                                <a href="@Url.Action("Collection", "Home")" class="btn amado-btn w-100">Continue Shopping</a>
                             </div>
                         </div>
                         <div class="col-md-4">

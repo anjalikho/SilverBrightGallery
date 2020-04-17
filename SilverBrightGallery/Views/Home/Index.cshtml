@@ -145,7 +145,7 @@
                         @*<a href="shop.html">*@
                         <a href='@Url.Action("ProductDetail", "Home",new { id=item.ID})'>
                             <img src="~/Content/img/@Url.Content(item.Photo)"
-                                 style="height:550px; width:530px; border: 1px solid gray;" alt="">
+                                 style="height:450px; width:430px; border: 1px solid gray;" alt="">
                             <!-- Hover Content -->
                             <div class="hover-content">
                                 <div class="line"></div>
@@ -159,7 +159,6 @@
                                 <p>@item.Discount</p>
                             </div>
                             }
-
                         </a>
                     </div>
 }
